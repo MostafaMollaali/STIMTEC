@@ -64,8 +64,16 @@
                         </property>
                         <property>
                             <name>density</name>
-                            <type>Constant</type>
-                            <value>1e3</value>
+                            <type>Linear</type>
+                            <reference_value>1000.0</reference_value>
+                            <independent_variable>
+                                <variable_name>liquid_phase_pressure
+                                </variable_name>
+                                <reference_condition>1e5
+                                </reference_condition>
+                                <slope>4.6511627906976743356e-10
+                                </slope>
+                            </independent_variable>
                         </property>
                     </properties>
                 </phase>
@@ -116,8 +124,16 @@
                         </property>
                         <property>
                             <name>density</name>
-                            <type>Constant</type>
-                            <value>1e3</value>
+                            <type>Linear</type>
+                            <reference_value>1000.0</reference_value>
+                            <independent_variable>
+                                <variable_name>liquid_phase_pressure
+                                </variable_name>
+                                <reference_condition>1e5
+                                </reference_condition>
+                                <slope>4.6511627906976743356e-10
+                                </slope>
+                            </independent_variable>
                         </property>
                     </properties>
                 </phase>
@@ -168,8 +184,16 @@
                         </property>
                         <property>
                             <name>density</name>
-                            <type>Constant</type>
-                            <value>1e3</value>
+                            <type>Linear</type>
+                            <reference_value>1000.0</reference_value>
+                            <independent_variable>
+                                <variable_name>liquid_phase_pressure
+                                </variable_name>
+                                <reference_condition>1e5
+                                </reference_condition>
+                                <slope>4.6511627906976743356e-10
+                                </slope>
+                            </independent_variable>
                         </property>
                     </properties>
                 </phase>
