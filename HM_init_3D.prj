@@ -447,16 +447,22 @@
             <name>linear_solver</name>
             <eigen>
                 <solver_type>SparseLU</solver_type>
+                <!--solver_type>PardisoLU</solver_type-->
                 <scaling>true</scaling>
             </eigen>
             <petsc>
-                <parameters>
+                <!--parameters>
                     -ksp_type bcgs
                     -pc_type lu
                     -ksp_rtol 1.e-20 -ksp_atol 1.e-18
                     -ksp_max_it 4000
+                </parameters-->
+                <parameters>
+                    -ksp_type bcgs
+                    -pc_type lu -pc_factor_mat_solver_type mkl_pardiso
                 </parameters>
             </petsc>
+            <lis>-i bicgstab -p ilut -tol 1e-12 -maxiter 3000</lis>
         </linear_solver>
     </linear_solvers>
 </OpenGeoSysProject>
