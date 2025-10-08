@@ -361,14 +361,13 @@
             <boundary_conditions>
                 <boundary_condition>
                     <mesh>physical_group_CENTER</mesh>
-                    <type>Dirichlet</type>
                     <component>0</component>
                     <type>DirichletWithinTimeInterval</type>
                     <parameter>p_injection_rate</parameter>
                     <time_interval>
                         <start> 500 </start>
                         <end> 1000 </end>
-                    </time_interval>
+                    </time_interval>                    
                 </boundary_condition>
                 
                 <boundary_condition>
