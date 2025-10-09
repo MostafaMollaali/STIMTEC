@@ -153,16 +153,21 @@ def create_fractured_cube_centered(
         # ---------------------------
         # TRANSFINITE + RECOMBINE
         # ---------------------------
+        thickness_lines = [10, 11, 14, 15, 18, 19, 22, 23]
+        for l in thickness_lines:
+            mgeo.setTransfiniteCurve(l, 2)
+        
         trans_surf = {8, 17, 4, 12, 19, 20, 21, 16, 9, 13, 5}
         for s in trans_surf:
             mgeo.setTransfiniteSurface(s)
             mgeo.setRecombine(1, s)
-
-        # Volumes 3 and 4 set as transfinite
+        
+        # Volumes 3 and 4 (the fracture band) as transfinite
         for v in [3, 4]:
             mgeo.setTransfiniteVolume(v)
-
+        
         geo.synchronize()
+
 
         # ---------------------------
         # PHYSICAL GROUPS (names preserved)
