@@ -14,7 +14,6 @@
         <mesh>physical_group_P_BOT_FR.vtu</mesh>
         <mesh>physical_group_P_BOT_BL.vtu</mesh>
         <mesh>physical_group_P_BOT_BR.vtu</mesh>
-        
         <mesh>physical_group_CENTER.vtu</mesh>
     </meshes>
     <processes>
@@ -47,10 +46,8 @@
             </secondary_variables>
             <specific_body_force>0 0 -9.81</specific_body_force>
             <initial_stress type="total"> sigma0 </initial_stress>
-            
         </process>
     </processes>
-    
     <media>
         <medium id="0">
             <phases>
@@ -102,7 +99,7 @@
                 <property>
                     <name>permeability</name>
                     <type>Constant</type>
-                    <value>1.0e-19</value>
+                    <value>1e-19</value>
                 </property>
                 <property>
                     <name>biot_coefficient</name>
@@ -111,7 +108,6 @@
                 </property>
             </properties>
         </medium>
-        
         <medium id="1">
             <phases>
                 <phase>
@@ -162,7 +158,8 @@
                 <property>
                     <name>permeability</name>
                     <type>Constant</type>
-                    <value>8.3e-14</value> <!--1e-6^2/12=8.3e-14 -->
+                    <value>8.333333333333334e-14</value>
+                    <!--1e-6^2/12=8.3e-14 -->
                 </property>
                 <property>
                     <name>biot_coefficient</name>
@@ -171,7 +168,6 @@
                 </property>
             </properties>
         </medium>
-        
         <medium id="2">
             <phases>
                 <phase>
@@ -222,7 +218,7 @@
                 <property>
                     <name>permeability</name>
                     <type>Constant</type>
-                    <value>1.0e-19</value>
+                    <value>1e-19</value>
                 </property>
                 <property>
                     <name>biot_coefficient</name>
@@ -232,7 +228,6 @@
             </properties>
         </medium>
     </media>
-
     <time_loop>
         <processes>
             <process ref="HM">
@@ -260,7 +255,7 @@
         </processes>
         <output>
             <type>VTK</type>
-            <prefix>HM_init_3D</prefix>
+            <prefix>genesis_HM_init</prefix>
             <variables>
                 <variable>MaterialIDs</variable>
                 <variable>displacement</variable>
@@ -281,7 +276,7 @@
         <parameter>
             <name>E1</name>
             <type>Constant</type>
-            <value>83.9e9</value>
+            <value>83900000000.0</value>
         </parameter>
         <parameter>
             <name>nu1</name>
@@ -344,7 +339,7 @@
         <curve>
             <name>timeRamp</name>
             <coords>0 500 600 700 800 900 1000</coords>
-            <values>0.3924 0.3924 0.51392 0.63544 0.75696 0.87848 1.0</values>
+            <values>0.1962 0.1962 0.35696 0.51772 0.67848 0.83924 1</values>
         </curve>
     </curves>
     <process_variables>
@@ -362,9 +357,8 @@
                     <time_interval>
                         <start> 500 </start>
                         <end> 1000 </end>
-                    </time_interval>                    
+                    </time_interval>
                 </boundary_condition>
-                
                 <boundary_condition>
                     <mesh>physical_group_F_LEFT</mesh>
                     <type>Dirichlet</type>
@@ -401,7 +395,6 @@
                     <component>0</component>
                     <parameter>water_pressure</parameter>
                 </boundary_condition>
-                
             </boundary_conditions>
         </process_variable>
         <process_variable>
@@ -429,8 +422,6 @@
                     <component>0</component>
                     <parameter>zero</parameter>
                 </boundary_condition>
-
-                
                 <!-- Normal traction -->
                 <boundary_condition>
                     <mesh>physical_group_F_FRONT</mesh>
@@ -447,8 +438,6 @@
                     <type>NormalTraction</type>
                     <parameter>geo_stress</parameter>
                 </boundary_condition>
-
-                
             </boundary_conditions>
         </process_variable>
     </process_variables>
