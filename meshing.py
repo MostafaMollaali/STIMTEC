@@ -7,9 +7,9 @@ def create_fractured_cube_centered(
     filepath: str | Path,
     lc: float = 1.0,          # matrix target h
     lc_frac: float = 0.2,     # fracture band target h
-    L: float = 4.0,
-    H: float = 4.0,
+    W: float = 4.0,
     T: float = 4.0,
+    H: float = 4.0,
     theta_deg: float = 0.0,   # your input (e.g., 0 or 30)
     b: float = 0.2,           # total band thickness (~2*r_b)
     center_z: float = 0.0,    # shift the whole sample along Z (e.g., -100.0)
@@ -19,11 +19,11 @@ def create_fractured_cube_centered(
     model_name = filepath.stem
 
     theta = math.radians(theta_deg)
-    dy = (L / 2.0) * math.tan(theta)
+    dy = (W / 2.0) * math.tan(theta)
     r_b = b / (2.0 * math.cos(theta)) if math.cos(theta) != 0 else 0.0
 
-    z_bot = center_z - T / 2.0
-    z_top = center_z + T / 2.0
+    z_bot = center_z - H / 2.0
+    z_top = center_z + H / 2.0
 
     gmsh.initialize()
     try:
@@ -39,32 +39,32 @@ def create_fractured_cube_centered(
         # POINTS 
         # ---------------------------
         # Cube corners
-        geo.addPoint(-L/2,  H/2, z_bot, lc, tag=1)
-        geo.addPoint( L/2,  H/2, z_bot, lc, tag=2)
-        geo.addPoint( L/2, -H/2, z_bot, lc, tag=3)
-        geo.addPoint(-L/2, -H/2, z_bot, lc, tag=4)
-        geo.addPoint(-L/2,  H/2, z_top, lc, tag=5)
-        geo.addPoint( L/2,  H/2, z_top, lc, tag=6)
-        geo.addPoint( L/2, -H/2, z_top, lc, tag=7)
-        geo.addPoint(-L/2, -H/2, z_top, lc, tag=8)
+        geo.addPoint(-W/2,  T/2, z_bot, lc, tag=1)
+        geo.addPoint( W/2,  T/2, z_bot, lc, tag=2)
+        geo.addPoint( W/2, -T/2, z_bot, lc, tag=3)
+        geo.addPoint(-W/2, -T/2, z_bot, lc, tag=4)
+        geo.addPoint(-W/2,  T/2, z_top, lc, tag=5)
+        geo.addPoint( W/2,  T/2, z_top, lc, tag=6)
+        geo.addPoint( W/2, -T/2, z_top, lc, tag=7)
+        geo.addPoint(-W/2, -T/2, z_top, lc, tag=8)
 
         # Fracture mid-plane and bands (y varies with ±dy)
-        geo.addPoint(-L/2, -dy,        z_top, lc_frac, tag=9)
-        geo.addPoint( L/2,  dy,        z_top, lc_frac, tag=12)
-        geo.addPoint(-L/2, -dy,        z_bot, lc_frac, tag=15)
-        geo.addPoint( L/2,  dy,        z_bot, lc_frac, tag=18)
+        geo.addPoint(-W/2, -dy,        z_top, lc_frac, tag=9)
+        geo.addPoint( W/2,  dy,        z_top, lc_frac, tag=12)
+        geo.addPoint(-W/2, -dy,        z_bot, lc_frac, tag=15)
+        geo.addPoint( W/2,  dy,        z_bot, lc_frac, tag=18)
 
         # Bottom (-rb)
-        geo.addPoint(-L/2, -dy - r_b,  z_top, lc_frac, tag=10)
-        geo.addPoint( L/2,  dy - r_b,  z_top, lc_frac, tag=13)
-        geo.addPoint(-L/2, -dy - r_b,  z_bot, lc_frac, tag=16)
-        geo.addPoint( L/2,  dy - r_b,  z_bot, lc_frac, tag=19)
+        geo.addPoint(-W/2, -dy - r_b,  z_top, lc_frac, tag=10)
+        geo.addPoint( W/2,  dy - r_b,  z_top, lc_frac, tag=13)
+        geo.addPoint(-W/2, -dy - r_b,  z_bot, lc_frac, tag=16)
+        geo.addPoint( W/2,  dy - r_b,  z_bot, lc_frac, tag=19)
 
         # Top (+rb)
-        geo.addPoint(-L/2, -dy + r_b,  z_top, lc_frac, tag=11)
-        geo.addPoint( L/2,  dy + r_b,  z_top, lc_frac, tag=14)
-        geo.addPoint(-L/2, -dy + r_b,  z_bot, lc_frac, tag=17)
-        geo.addPoint( L/2,  dy + r_b,  z_bot, lc_frac, tag=20)
+        geo.addPoint(-W/2, -dy + r_b,  z_top, lc_frac, tag=11)
+        geo.addPoint( W/2,  dy + r_b,  z_top, lc_frac, tag=14)
+        geo.addPoint(-W/2, -dy + r_b,  z_bot, lc_frac, tag=17)
+        geo.addPoint( W/2,  dy + r_b,  z_bot, lc_frac, tag=20)
 
         # Center point
         geo.addPoint(0.0, 0.0, center_z, lc, tag=100)
