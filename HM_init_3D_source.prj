@@ -44,6 +44,7 @@
             <secondary_variables>
                 <secondary_variable internal_name="sigma" output_name="sigma"/>
                 <secondary_variable internal_name="epsilon" output_name="epsilon"/>
+                <secondary_variable internal_name="velocity" output_name="velocity"/>
             </secondary_variables>
             <specific_body_force>0 0 -9.81</specific_body_force>
             <initial_stress type="total"> sigma0 </initial_stress>
@@ -254,7 +255,7 @@
                     <t_end>1000</t_end>
                     <initial_dt>20</initial_dt>
                     <minimum_dt>20</minimum_dt>
-                    <maximum_dt>100</maximum_dt>
+                    <maximum_dt>50</maximum_dt>
                     <number_iterations>1 2 5 10  20</number_iterations>
                     <multiplier>       1.6 1.4 1.0 0.7 0.5</multiplier>
                 </time_stepping>
@@ -264,11 +265,12 @@
             <type>VTK</type>
             <prefix>HM_init_3D</prefix>
             <variables>
-                <!--variable>MaterialIDs</variable>
+                <variable>MaterialIDs</variable>
                 <variable>displacement</variable>
                 <variable>pressure</variable>
                 <variable>sigma</variable>
-                <variable>epsilon</variable-->
+                <variable>epsilon</variable>
+                <variable>velocity</variable>
             </variables>
             <output_iteration_results>false</output_iteration_results>
             <timesteps>
@@ -301,16 +303,15 @@
             <value>0.21</value>
         </parameter>
         <parameter>
-        <name>injectionFlowRate_Inlet</name>
-        <type>Function</type>
-        <expression>(t &lt; 500 ? 0.0 :
-            t &lt; 600 ? 1e6 :
-            t &lt; 700 ? 2e6 :
-            t &lt; 800 ? 3e6 :
-            t &lt; 900 ? 4e6 :
-            t &lt; 1000 ? 5e6 :
-            5e6)
-        </expression>
+          <name>injectionFlowRate_Inlet</name>
+          <type>Function</type>
+          <expression>(t &lt; 500 ? 0.0 :
+                       t &lt; 600 ? 4.167e-2 :
+                       t &lt; 700 ? 8.334e-2 :
+                       t &lt; 800 ? 1.2501e-1 :
+                       t &lt; 900 ? 1.6668e-1 :
+                       t &lt; 1000 ? 2.0835e-1 :
+                                  2.0835e-1)</expression>
         </parameter>
         <parameter>
             <name>displacement0</name>
@@ -349,18 +350,14 @@
             <components>1</components>
             <order>1</order>
             <initial_condition>water_pressure</initial_condition>
-            <boundary_conditions>
-                <boundary_condition>
+            <source_terms>
+                <source_term>
                     <mesh>physical_group_CENTER</mesh>
-                    <component>0</component>
-                    <type>DirichletWithinTimeInterval</type>
+                    <type>Nodal</type>
                     <parameter>injectionFlowRate_Inlet</parameter>
-                    <time_interval>
-                        <start> 500 </start>
-                        <end> 1000 </end>
-                    </time_interval>                    
-                </boundary_condition>
-                
+                </source_term>
+            </source_terms>
+            <boundary_conditions>               
                 <boundary_condition>
                     <mesh>physical_group_F_LEFT</mesh>
                     <type>Dirichlet</type>
@@ -424,9 +421,7 @@
                     <type>Dirichlet</type>
                     <component>0</component>
                     <parameter>zero</parameter>
-                </boundary_condition>
-
-                
+                </boundary_condition>            
                 <!-- Normal traction -->
                 <boundary_condition>
                     <mesh>physical_group_F_FRONT</mesh>
@@ -442,9 +437,7 @@
                     <mesh>physical_group_F_TOP</mesh>
                     <type>NormalTraction</type>
                     <parameter>geo_stress</parameter>
-                </boundary_condition>
-
-                
+                </boundary_condition> 
             </boundary_conditions>
         </process_variable>
     </process_variables>
