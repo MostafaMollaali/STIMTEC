@@ -326,17 +326,27 @@
         <parameter>
             <name>sigma0</name>
             <type>Function</type>
-            <expression>2750*9.81*z</expression>
-            <expression>2750*9.81*z</expression>
-            <expression>2750*9.81*z</expression>
+            <expression>-5.5e+6</expression>
+            <expression>-2.6e+6</expression>
+            <expression>-3.6e+6</expression>
             <expression>0</expression>
             <expression>0</expression>
             <expression>0</expression>
         </parameter>
         <parameter>
-            <name>geo_stress</name>
-            <type>Function</type>
-            <expression>2750*9.81*z</expression>
+            <name>traction_y</name>
+            <type>Constant</type>
+            <value>-2.6e+6</value>
+        </parameter>
+        <parameter>
+            <name>traction_x</name>
+            <type>Constant</type>
+            <value>-5.5e+6</value>
+        </parameter>
+        <parameter>
+            <name>traction_z</name>
+            <type>Constant</type>
+            <value>-3.6e+6</value>
         </parameter>
         <parameter>
             <name>water_pressure</name>
@@ -422,22 +432,23 @@
                     <component>0</component>
                     <parameter>zero</parameter>
                 </boundary_condition>            
+                
                 <!-- Normal traction -->
                 <boundary_condition>
                     <mesh>physical_group_F_FRONT</mesh>
                     <type>NormalTraction</type>
-                    <parameter>geo_stress</parameter>
+                    <parameter>traction_y</parameter>
                 </boundary_condition>
                 <boundary_condition>
                     <mesh>physical_group_F_RIGHT</mesh>
                     <type>NormalTraction</type>
-                    <parameter>geo_stress</parameter>
+                    <parameter>traction_x</parameter>
                 </boundary_condition>
                 <boundary_condition>
                     <mesh>physical_group_F_TOP</mesh>
                     <type>NormalTraction</type>
-                    <parameter>geo_stress</parameter>
-                </boundary_condition> 
+                    <parameter>traction_z</parameter>
+                </boundary_condition>
             </boundary_conditions>
         </process_variable>
     </process_variables>
