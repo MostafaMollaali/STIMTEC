@@ -1,10 +1,2 @@
-
-# macOS
-.DS_Store
-
-# Python
-__pycache__/
-*.py[cod]
-
-# Jupyter
-.ipynb_checkpoints/
+**/_out/**
+!**/_out/.gitkeep
