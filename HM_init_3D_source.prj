@@ -252,10 +252,10 @@
                     <type>IterationNumberBasedTimeStepping</type>
                     <t_initial>0</t_initial>
                     <!--500 + 500 s-->
-                    <t_end>1000</t_end>
-                    <initial_dt>20</initial_dt>
+                    <t_end>1e+5</t_end>
+                    <initial_dt>200</initial_dt>
                     <minimum_dt>20</minimum_dt>
-                    <maximum_dt>50</maximum_dt>
+                    <maximum_dt>5000</maximum_dt>
                     <number_iterations>1 2 5 10  20</number_iterations>
                     <multiplier>       1.6 1.4 1.0 0.7 0.5</multiplier>
                 </time_stepping>
