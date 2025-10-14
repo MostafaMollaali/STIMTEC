@@ -1,2 +1,27 @@
 **/_out/**
 !**/_out/.gitkeep
+**/.ipynb_checkpoints/**
+**/__pycache__/**
+*.py[cod]
+*$py.class
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# External disk metadata
+.Spotlight-V100
+.Trashes
+
+# AFP share caches
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
